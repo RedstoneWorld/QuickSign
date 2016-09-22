@@ -3,6 +3,7 @@ package me.DDoS.Quicksign.listener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import me.DDoS.Quicksign.util.QSConfig;
 import me.DDoS.Quicksign.session.EditSession;
@@ -311,7 +312,7 @@ public class QSListener implements Listener {
 
     private Block getTargetBlock(Player player) {
 
-        return player.getTargetBlock(null, QSConfig.maxReach);
+        return player.getTargetBlock((Set<Material>) null, QSConfig.maxReach);
 
     }
 

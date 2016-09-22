@@ -35,7 +35,7 @@ public class QSUtil {
 
 	public static String stripColors(String string) {
 
-		return string.replaceAll("&[0-9a-fA-Fk-oK-OrR]", "");
+		return ChatColor.stripColor(string);
 
 	}
 

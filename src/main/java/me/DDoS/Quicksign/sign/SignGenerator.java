@@ -13,6 +13,8 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Set;
+
 /**
  *
  * @author DDoS
@@ -38,11 +40,11 @@ public class SignGenerator {
 
         if (!plugin.hasPermissions(player, Permission.FS_NO_INV)) {
 
-            player.getInventory().removeItem(new ItemStack(323, 1));
+            player.getInventory().removeItem(new ItemStack(Material.SIGN, 1));
 
         }
 
-        Block block = player.getTargetBlock(null, QSConfig.maxReach);
+        Block block = player.getTargetBlock((Set<Material>) null, QSConfig.maxReach);
 
         if (!plugin.getSelectionHandler().checkForSelectionRights(player, block)) {
 

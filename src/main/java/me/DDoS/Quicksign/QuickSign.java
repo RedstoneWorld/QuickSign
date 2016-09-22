@@ -19,6 +19,7 @@ import me.DDoS.Quicksign.session.*;
 import me.DDoS.Quicksign.sign.SignGenerator;
 import me.DDoS.Quicksign.util.*;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
@@ -151,7 +152,7 @@ public class QuickSign extends JavaPlugin {
 
                 if (hasPermissions(player, Permission.NO_REACH_LIMIT)) {
 
-                    Block block = player.getTargetBlock(null, QSConfig.maxReach);
+                    Block block = player.getTargetBlock((Set<Material>) null, QSConfig.maxReach);
 
                     if (!QSUtil.checkForSign(block)) {
 
