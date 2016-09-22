@@ -165,15 +165,7 @@ public class QSListener implements Listener {
 
             event.setCancelled(true);
 
-            if (!plugin.getSession(player).isSpoutSession()) {
-
-                plugin.getSelectionHandler().handleSignSelection(event, sign, player);
-
-            } else {
-
-                plugin.getSpoutHandler().handleSpoutEditing(player, sign);
-
-            }
+            plugin.getSelectionHandler().handleSignSelection(event, sign, player);
         }
     }
 
@@ -314,15 +306,7 @@ public class QSListener implements Listener {
         event.setCancelled(true);
         Sign sign = (Sign) block;
 
-        if (!plugin.getSession(player).isSpoutSession()) {
-
-            plugin.getSelectionHandler().handleSignSelection(null, sign, player);
-
-        } else {
-
-            plugin.getSpoutHandler().handleSpoutEditing(player, sign);
-
-        }
+        plugin.getSelectionHandler().handleSignSelection(null, sign, player);
     }
 
     private Block getTargetBlock(Player player) {

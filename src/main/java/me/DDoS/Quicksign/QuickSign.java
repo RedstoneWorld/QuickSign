@@ -28,7 +28,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spoutapi.SpoutManager;
 
 /**
  *
@@ -44,8 +43,6 @@ public class QuickSign extends JavaPlugin {
     //
     private final SignGenerator signGenerator = new SignGenerator(this);
     //
-    private SpoutHandler spoutHandler;
-    private boolean spoutOn = false;
     //
     private final Map<Player, EditSession> sessions = new HashMap<Player, EditSession>();
     //
@@ -59,13 +56,6 @@ public class QuickSign extends JavaPlugin {
         permissions = new PermissionsHandler(this).getPermissions();
 
         getServer().getPluginManager().registerEvents(new QSListener(this), this);
-
-        if (checkForSpout()) {
-
-            getServer().getPluginManager().registerEvents(new QSSpoutListener(this), this);
-            spoutHandler = new SpoutHandler(this);
-
-        }
 
         checkForWorldGuard();
         checkForResidence();
@@ -119,45 +109,6 @@ public class QuickSign extends JavaPlugin {
                 QSUtil.tell(player, "disabled.");
                 return true;
 
-            }
-
-            if (args.length == 1 && args[0].equalsIgnoreCase("spout")) {
-
-                if (hasPermissions(player, Permission.USE_SPOUT)) {
-
-                    if (!spoutOn) {
-
-                        QSUtil.tell(player, "Spout is not installed on the server.");
-                        return true;
-
-                    }
-					
-					if (!SpoutManager.getPlayerManager().getPlayer(player).isSpoutCraftEnabled()) {
-						
-						QSUtil.tell(player, "You need SpoutCraft to use the Spout mode.");
-						return true;
-						
-					}
-
-                    if (isUsing(player)) {
-
-                        QSUtil.tell(player, "Please disable QuickSign, and renable with '/qs spout'.");
-                        return true;
-
-                    } else {
-
-                        sessions.put(player, new SpoutEditSession(player, this));
-                        QSUtil.tell(player, "enabled [Spout Mode].");
-                        return true;
-
-                    }
-
-                } else {
-
-                    player.sendMessage(ChatColor.RED + "You don't have permission for this command.");
-                    return true;
-
-                }
             }
 
             if (args.length >= 3 && args[0].equalsIgnoreCase("fs")) {
@@ -239,12 +190,6 @@ public class QuickSign extends JavaPlugin {
 
     }
 
-    public SpoutHandler getSpoutHandler() {
-
-        return spoutHandler;
-
-    }
-
     public SelectionHandler getSelectionHandler() {
 
         return selectionHandler;
@@ -284,18 +229,6 @@ public class QuickSign extends JavaPlugin {
     public BlackList getBlackList() {
 
         return blackList;
-
-    }
-
-    public boolean isSpoutOn() {
-
-        return spoutOn;
-
-    }
-
-    public void setSpoutOn(boolean spoutOn) {
-
-        this.spoutOn = spoutOn;
 
     }
 
@@ -409,26 +342,6 @@ public class QuickSign extends JavaPlugin {
         } else {
 
             log.info("[QuickSign] No LogBlock detected. Features disabled.");
-
-        }
-    }
-
-    private boolean checkForSpout() {
-
-        PluginManager pm = getServer().getPluginManager();
-        Plugin plugin = pm.getPlugin("Spout");
-
-        if (plugin != null) {
-
-            log.info("[QuickSign] Spout detected. Features enabled.");
-            spoutOn = true;
-            return true;
-
-        } else {
-
-            log.info("[QuickSign] No Spout detected. Features disabled.");
-            spoutOn = false;
-            return false;
 
         }
     }

@@ -27,14 +27,12 @@ public enum Permission {
     COLOR_CMD("quicksign.colorcmd"),
     COLOR_DYE("quicksign.colordyes"),
     COLOR_SIGN_CHANGE("quicksign.colorsignchange"),
-    COLOR_SPOUT("quicksign.colorspout"),
     CHAT_SIGNS("quicksign.usechatsigns"),
     COMMAND_SIGNS("quicksign.usecommandsigns"),
     CONSOLE_COMMAND_SIGNS("quicksign.useconcommandsigns"),
     PLACE_CHAT_SIGNS("quicksign.placechatsigns"),
     PLACE_COMMAND_SIGNS("quicksign.placecommandsigns"),
     PLACE_CONSOLE_COMMAND_SIGNS("quicksign.placeconcommandsigns"),
-    USE_SPOUT("quicksign.usespout"),
     IGNORE_BLACK_LIST("quicksign.ignoreblacklist"),
     CHESTSHOP_EDIT("quicksign.editchestshopsigns");
     //
