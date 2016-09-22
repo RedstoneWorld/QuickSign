@@ -29,8 +29,6 @@ public abstract class EditSession {
     
     public abstract boolean handleCommand(String[] args);
     
-    public abstract boolean isSpoutSession();
-    
     public abstract boolean addSign(Sign sign);
     
     public abstract void removeSign(Sign sign);

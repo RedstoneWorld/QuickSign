@@ -41,13 +41,6 @@ public class StandardEditSession extends EditSession {
     }
 
     @Override
-    public boolean isSpoutSession() {
-
-        return false;
-
-    }
-
-    @Override
     public boolean addSign(Sign sign) {
 
         if (!checkIfSelected(sign)) {
