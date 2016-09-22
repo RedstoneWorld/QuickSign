@@ -130,10 +130,6 @@ public class QSConfig {
             config.set("useChestShop", true);
         }
 
-        if (!keys.contains("useSpout")) {
-            config.set("useSpout", true);
-        }
-
         if (!keys.contains("colorOnPlacement")) {
             config.set("colorOnPlacement", true);
         }
