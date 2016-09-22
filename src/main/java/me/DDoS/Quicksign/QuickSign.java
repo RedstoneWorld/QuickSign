@@ -2,7 +2,6 @@ package me.DDoS.Quicksign;
 
 import com.griefcraft.lwc.LWCPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import couk.Adamki11s.Regios.API.RegiosAPI;
 import de.diddiz.LogBlock.Consumer;
 import de.diddiz.LogBlock.LogBlock;
 import java.io.IOException;
@@ -60,7 +59,6 @@ public class QuickSign extends JavaPlugin {
         checkForWorldGuard();
         checkForResidence();
         checkForChestShop();
-        checkForRegios();
         checkForLogBlock();
         checkForLWC();
 
@@ -290,23 +288,6 @@ public class QuickSign extends JavaPlugin {
         } else {
 
             log.info("[QuickSign] No ChestShop detected. Features disabled.");
-
-        }
-    }
-
-    private void checkForRegios() {
-
-        PluginManager pm = getServer().getPluginManager();
-        Plugin plugin = pm.getPlugin("Regios");
-
-        if (plugin != null) {
-
-            log.info("[QuickSign] Regios detected. Features enabled.");
-            selectionHandler.setRegiosAPI(new RegiosAPI());
-
-        } else {
-
-            log.info("[QuickSign] No Regios detected. Features disabled.");
 
         }
     }

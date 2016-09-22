@@ -31,9 +31,6 @@ import com.bekvon.bukkit.residence.protection.ResidencePermissions;
 import com.griefcraft.lwc.LWC;
 import com.griefcraft.model.Protection;
 
-import couk.Adamki11s.Regios.API.RegiosAPI;
-import couk.Adamki11s.Regios.Regions.Region;
-
 import com.Acrobot.ChestShop.Utils.uSign;
 import org.bukkit.block.Block;
 
@@ -47,7 +44,6 @@ public class SelectionHandler {
     private final QuickSign plugin;
     //
     private WorldGuardPlugin wg = null;
-    private RegiosAPI regiosAPI = null;
     private LWC lwc = null;
     private boolean chestShop = false;
     private boolean residence = false;
@@ -61,12 +57,6 @@ public class SelectionHandler {
     public void setWG(WorldGuardPlugin wg) {
 
         this.wg = wg;
-
-    }
-
-    public void setRegiosAPI(RegiosAPI regiosAPI) {
-
-        this.regiosAPI = regiosAPI;
 
     }
 
@@ -208,32 +198,6 @@ public class SelectionHandler {
 
     }
 
-    private boolean checkForRegiosPerms(Player player, boolean forceRegion) {
-
-        Region region = regiosAPI.getRegion(player);
-
-        if (region == null && !forceRegion) {
-
-            return true;
-
-        }
-
-        if (region == null && forceRegion) {
-
-            return false;
-
-        }
-
-        if (region != null) {
-
-            return region.canBuild(player);
-
-        }
-
-        return false;
-
-    }
-
     private boolean checkForLWCPerms(Player player, Block block, boolean forceProtection) {
 
         Protection protection = lwc.findProtection(block);
@@ -271,10 +235,9 @@ public class SelectionHandler {
         Location location = block.getLocation();
         World world = location.getWorld();
 
-        boolean wgPerm = false, residencePerm = false,
-                regiosPerm = false, lwcPerm = false, chestShopPerm = false;
+        boolean wgPerm = false, residencePerm = false, lwcPerm = false, chestShopPerm = false;
 
-        if (wg == null && !residence && regiosAPI == null && lwc == null && !chestShop) {
+        if (wg == null && !residence && lwc == null && !chestShop) {
 
             return plugin.hasPermissions(player, Permission.USE);
 
@@ -321,21 +284,6 @@ public class SelectionHandler {
             }
         }
 
-        if (regiosAPI != null) {
-
-            if (plugin.hasPermissions(player, Permission.RE_CAN_BUILD_FP)
-                    && checkForRegiosPerms(player, true)) {
-
-                regiosPerm = true;
-
-            } else if (plugin.hasPermissions(player, Permission.RE_CAN_BUILD)
-                    && checkForRegiosPerms(player, false)) {
-
-                regiosPerm = true;
-
-            }
-        }
-
         if (lwc != null) {
 
             if (plugin.hasPermissions(player, Permission.LWC_CAN_ACCESS_FP)
@@ -364,7 +312,7 @@ public class SelectionHandler {
             }
         }
 
-        return wgPerm && residencePerm && regiosPerm && lwcPerm && chestShopPerm;
+        return wgPerm && residencePerm && lwcPerm && chestShopPerm;
 
     }
 

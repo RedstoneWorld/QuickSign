@@ -30,7 +30,6 @@ public class QSConfig {
     //
     private boolean useWG;
     private boolean useRes;
-    private boolean useRegios;
     private boolean useLogBlock;
     private boolean useLWC;
     private boolean useChestShop;
@@ -119,10 +118,6 @@ public class QSConfig {
             config.set("useResidence", false);
         }
 
-        if (!keys.contains("useRegios")) {
-            config.set("useRegios", false);
-        }
-        
         if (!keys.contains("useLWC")) {
             config.set("useLWC", false);
         }
@@ -169,7 +164,6 @@ public class QSConfig {
         maxReach = config.getInt("maxReach", 100);
         useWG = config.getBoolean("useWorldGuard", true);
         useRes = config.getBoolean("useResidence", false);
-        useRegios = config.getBoolean("useRegios", false);
         useLWC = config.getBoolean("useLWC", false);
         useLogBlock = config.getBoolean("useLogBock", true);
         useChestShop = config.getBoolean("useChestShop", true);
@@ -186,7 +180,6 @@ public class QSConfig {
         maxReach = 100;
         useWG = true;
         useRes = true;
-        useRegios = true;
         useLWC = false;
         useLogBlock = true;
         useChestShop = true;
@@ -246,13 +239,6 @@ public class QSConfig {
 
             plugin.getSelectionHandler().setResidence(false);
             QuickSign.log.info("[QuickSign] Residence support disabled by config.");
-
-        }
-
-        if (!useRegios) {
-
-            plugin.getSelectionHandler().setRegiosAPI(null);
-            QuickSign.log.info("[QuickSign] Regios support disabled by config.");
 
         }
         
