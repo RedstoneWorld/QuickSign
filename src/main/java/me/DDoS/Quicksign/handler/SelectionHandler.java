@@ -1,7 +1,10 @@
 package me.DDoS.Quicksign.handler;
 
 import java.util.Map.Entry;
+import java.util.UUID;
 
+import com.Acrobot.ChestShop.Signs.ChestShopSign;
+import com.Acrobot.ChestShop.UUIDs.NameManager;
 import me.DDoS.Quicksign.session.StandardEditSession;
 import me.DDoS.Quicksign.session.EditSession;
 import me.DDoS.Quicksign.util.QSUtil;
@@ -31,7 +34,6 @@ import com.bekvon.bukkit.residence.protection.ResidencePermissions;
 import com.griefcraft.lwc.LWC;
 import com.griefcraft.model.Protection;
 
-import com.Acrobot.ChestShop.Utils.uSign;
 import org.bukkit.block.Block;
 
 /**
@@ -224,9 +226,14 @@ public class SelectionHandler {
 
     }
 
-    private boolean chekForChestShopPerms(Player player, Sign sign) {
+    private boolean checkForChestShopPerms(Player player, Sign sign) {
 
-        return uSign.canAccess(player, sign);
+        if (ChestShopSign.isValid(sign)) {
+            String ownerName = sign.getLine(ChestShopSign.NAME_LINE);
+            UUID ownerId = NameManager.getUUIDFor(ownerName);
+            return player.getUniqueId().equals(ownerId);
+        };
+        return false;
 
     }
 
@@ -304,7 +311,7 @@ public class SelectionHandler {
             if (QSUtil.checkForSign(block)) {
 
                 if (plugin.hasPermissions(player, Permission.CHESTSHOP_EDIT)
-                        && chekForChestShopPerms(player, (Sign) block.getState())) {
+                        && checkForChestShopPerms(player, (Sign) block.getState())) {
 
                     chestShopPerm = true;
 
