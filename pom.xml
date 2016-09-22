@@ -26,8 +26,8 @@
 		</dependency>
 		<dependency>
 			<groupId>de.diddiz</groupId>
-			<artifactId>LogBlock</artifactId>
-			<version>1.10.0-dev-SNAPSHOT</version>
+			<artifactId>logblock</artifactId>
+			<version>1.10.1-SNAPSHOT</version>
 		</dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
