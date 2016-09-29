@@ -230,7 +230,7 @@ public class SelectionHandler {
 
         if (ChestShopSign.isValid(sign)) {
             String ownerName = sign.getLine(ChestShopSign.NAME_LINE);
-            UUID ownerId = NameManager.getUUIDFor(ownerName);
+            UUID ownerId = NameManager.getUUID(ownerName);
             return player.getUniqueId().equals(ownerId);
         };
         return false;
